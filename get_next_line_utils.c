@@ -6,100 +6,90 @@
 /*   By: amorion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 15:15:09 by amorion-          #+#    #+#             */
-/*   Updated: 2021/08/21 13:32:50 by amorion-         ###   ########.fr       */
+/*   Updated: 2021/08/21 17:13:14 by amorion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-size_t	ft_strlen(char *s)
+/* protegida de cadenas nulas y overflow */
+size_t	ft_strlen(char const *s)
 {
 	size_t	i;
 
-	if (!s)
-		return (0);
 	i = 0;
-	while (s[i])
+	while (s && s[i] != '\0')
 		i++;
 	return (i);
 }
 
-char	*ft_strdup(char *s)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t	i;
-	char	*dest;
+	char	*ptr_src;
+	char	*ptr_dest;
 
-	dest = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!dest)
-		return (NULL);
 	i = 0;
-	while (s[i])
+	ptr_src = (void *)src;
+	ptr_dest = dest;
+	while (i < n)
 	{
-		dest[i] = s[i];
+		ptr_dest[i] = ptr_src[i];
 		i++;
 	}
-	dest[i] = 0;
 	return (dest);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+// Modificada para que solo una la cadena 2 hasta encontrar un salto de línea */
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
 
-	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!s2)
+		return (NULL);
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_hasnl(s2) + 1 + 1));
 	if (!str)
-		return (0);
-	i = -1;
+		return (NULL);
+	i = ft_strlen(s1);
 	j = 0;
-	if (s1)
-		while (s1[++i])
-			str[i] = s1[i];
-	if (s2)
+	ft_memcpy(str, s1, i);
+	while (s2[j])
 	{
-		while (s2[j])
-		{
-			str[i + j] = s2[j];
-			j++;
-		}
+		str[i + j] = s2[j];
+		j++;
+		if (s2[j - 1] == '\n')
+			break ;
 	}
-	str[i + j] = 0;
+	str[i + j] = '\0';
+	free((char *)s1);
 	return (str);
 }
 
-long long	ft_has_nl(char *s)
+int	ft_withnl(char *str)
 {
-	long long	i;
+	int	i;
 
-	if (s)
+	if (str)
 	{
 		i = 0;
-		while (s[i] != '\n' && s[i])
+		while (str[i] != '\0')
+		{
+			if (str[i] == '\n')
+				return (1);
 			i++;
-		if (s[i] == '\n')
-			return (i);
+		}
 	}
-	return (-1);
+	return (0);
 }
 
-char	*ft_new_line(char **res)
+size_t	ft_hasnl(char const *str)
 {
-	char		*line;
-	char		*tres;
-	long long	n;
+	size_t	i;
 
-	if (ft_has_nl(*res) != -1)
-	{
-		n = ft_has_nl(*res);
-		tres = ft_strdup(*res);
-		res[0][n + 1] = 0;
-		line = ft_strdup(*res);
-		free(*res);
-		*res = ft_strdup(&(tres[n + 1]));
-		free(tres);
-		return (line);
-	}
-	free(*res);
-	return (NULL);
+	i = 0;
+	if (str)
+		while (str[i] != '\n' && str[i])
+			i++;
+	return (i);
 }
