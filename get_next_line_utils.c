@@ -6,7 +6,7 @@
 /*   By: amorion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 15:15:09 by amorion-          #+#    #+#             */
-/*   Updated: 2021/08/20 16:42:20 by amorion-         ###   ########.fr       */
+/*   Updated: 2021/08/21 13:32:50 by amorion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,27 @@ size_t	ft_strlen(char *s)
 	if (!s)
 		return (0);
 	i = 0;
-	while(s[i])
+	while (s[i])
 		i++;
 	return (i);
 }
 
 char	*ft_strdup(char *s)
 {
-	size_t 	i;
+	size_t	i;
 	char	*dest;
 
 	dest = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!dest)
 		return (NULL);
 	i = 0;
-	while(s[i])
+	while (s[i])
 	{
 		dest[i] = s[i];
 		i++;
 	}
 	dest[i] = 0;
-   	return (dest);
+	return (dest);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -47,20 +47,15 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*str;
 	size_t	i;
 	size_t	j;
-	
+
 	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
-		return 0;
-	i = 0;
+		return (0);
+	i = -1;
 	j = 0;
 	if (s1)
-	{
-		while (s1[i])
-		{
+		while (s1[++i])
 			str[i] = s1[i];
-			i++;
-		}
-	}
 	if (s2)
 	{
 		while (s2[j])
@@ -73,24 +68,38 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-char	*ft_substr(char *str, size_t start, size_t len)
+long long	ft_has_nl(char *s)
 {
-	size_t	i;
-	char	*substr;
+	long long	i;
 
-	substr = malloc(len + 1);
-	if (!substr)
-		return (NULL);
-	if (start >= ft_strlen(str))
+	if (s)
 	{
-		free(substr);
-		return (NULL);
+		i = 0;
+		while (s[i] != '\n' && s[i])
+			i++;
+		if (s[i] == '\n')
+			return (i);
 	}
-	i = 0;
-	while(str[start + i] && i < len)
+	return (-1);
+}
+
+char	*ft_new_line(char **res)
+{
+	char		*line;
+	char		*tres;
+	long long	n;
+
+	if (ft_has_nl(*res) != -1)
 	{
-		substr[i] = str[start + i];
-		i++;
+		n = ft_has_nl(*res);
+		tres = ft_strdup(*res);
+		res[0][n + 1] = 0;
+		line = ft_strdup(*res);
+		free(*res);
+		*res = ft_strdup(&(tres[n + 1]));
+		free(tres);
+		return (line);
 	}
-	return(substr);			
+	free(*res);
+	return (NULL);
 }
