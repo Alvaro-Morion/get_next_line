@@ -6,7 +6,7 @@
 /*   By: amorion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 10:16:06 by amorion-          #+#    #+#             */
-/*   Updated: 2021/08/22 10:51:16 by amorion-         ###   ########.fr       */
+/*   Updated: 2021/08/22 13:22:13 by amorion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 char	*ft_free_null(char *line)
 {
-	free(line);
+	if (line)
+		free(line);
 	return (NULL);
 }
 

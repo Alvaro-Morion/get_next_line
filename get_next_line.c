@@ -6,7 +6,7 @@
 /*   By: amorion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:50:31 by amorion-          #+#    #+#             */
-/*   Updated: 2021/08/22 10:51:38 by amorion-         ###   ########.fr       */
+/*   Updated: 2021/08/22 13:21:45 by amorion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 /* Free line alocated memory and returns null (for errors)*/
 char	*ft_free_null(char *line)
 {
-	free(line);
+	if (line)	
+		free(line);
 	return (NULL);
 }
 

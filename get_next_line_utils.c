@@ -6,7 +6,7 @@
 /*   By: amorion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 15:15:09 by amorion-          #+#    #+#             */
-/*   Updated: 2021/08/22 10:40:00 by amorion-         ###   ########.fr       */
+/*   Updated: 2021/08/22 12:56:24 by amorion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	str[i + j] = '\0';
 	free((char *)s1);
-	return (str);
+	return (NULL); //Mod
 }
 
 /* 1 if nl 0 otherwise */
