@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amorion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/18 15:15:09 by amorion-          #+#    #+#             */
-/*   Updated: 2021/08/22 10:40:00 by amorion-         ###   ########.fr       */
+/*   Created: 2021/08/22 10:17:18 by amorion-          #+#    #+#             */
+/*   Updated: 2021/08/22 10:17:25 by amorion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-/* protected from null string and overflow */
+/* protegida de cadenas nulas y overflow */
 size_t	ft_strlen(char const *s)
 {
 	size_t	i;
@@ -39,7 +39,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-/* Modified to join s2 until a nl is found */
+// Modificada para que solo una la cadena 2 hasta encontrar un salto de línea */
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
@@ -66,7 +66,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-/* 1 if nl 0 otherwise */
+/*Devuelve 	1 si hay salto y 0 si no*/
 int	ft_withnl(char *str)
 {
 	int	i;
@@ -84,7 +84,8 @@ int	ft_withnl(char *str)
 	return (0);
 }
 
-/*It returns the position of the first nl or the length of the string*/
+/* Devielve la posición del primer salto de línea o la longitud de str si 
+no hay ninguno*/
 size_t	ft_hasnl(char const *str)
 {
 	size_t	i;
