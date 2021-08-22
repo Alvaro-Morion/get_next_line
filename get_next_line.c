@@ -6,7 +6,7 @@
 /*   By: amorion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:50:31 by amorion-          #+#    #+#             */
-/*   Updated: 2021/08/22 10:37:52 by amorion-         ###   ########.fr       */
+/*   Updated: 2021/08/22 10:51:38 by amorion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ new buffer to line. Repeats the process until buffer has an nl or the end
 of the file is reached.*/
 char	*get_next_line(int fd)
 {
-	int			byte;
+	ssize_t		byte;
 	char		*line;
 	static char	buffer[BUFFER_SIZE + 1];
 

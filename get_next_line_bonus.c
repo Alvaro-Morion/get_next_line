@@ -6,7 +6,7 @@
 /*   By: amorion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 10:16:06 by amorion-          #+#    #+#             */
-/*   Updated: 2021/08/22 10:41:16 by amorion-         ###   ########.fr       */
+/*   Updated: 2021/08/22 10:51:16 by amorion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_return(char buffer[], char *line)
 
 char	*get_next_line(int fd)
 {
-	int			byte;
+	ssize_t		byte;
 	char		*line;
 	static char	buffer[1024][BUFFER_SIZE + 1];
 
